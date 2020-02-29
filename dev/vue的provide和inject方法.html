@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue的provide和inject方法 | 王昊的个人博客</title>
+    <meta name="description" content="前端">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.7f50033a.css" as="style"><link rel="preload" href="/assets/js/app.df436686.js" as="script"><link rel="preload" href="/assets/js/16.25b6b60c.js" as="script"><link rel="prefetch" href="/assets/js/10.8434dcff.js"><link rel="prefetch" href="/assets/js/11.05267775.js"><link rel="prefetch" href="/assets/js/12.df6d9c5b.js"><link rel="prefetch" href="/assets/js/13.21976a23.js"><link rel="prefetch" href="/assets/js/14.adeb946a.js"><link rel="prefetch" href="/assets/js/15.05695498.js"><link rel="prefetch" href="/assets/js/17.29da1f0d.js"><link rel="prefetch" href="/assets/js/18.d5ac0d11.js"><link rel="prefetch" href="/assets/js/19.d33bd39b.js"><link rel="prefetch" href="/assets/js/2.bd311f47.js"><link rel="prefetch" href="/assets/js/20.1a54c413.js"><link rel="prefetch" href="/assets/js/21.3e37a615.js"><link rel="prefetch" href="/assets/js/22.f9b638cf.js"><link rel="prefetch" href="/assets/js/23.3b83adb9.js"><link rel="prefetch" href="/assets/js/3.d1de4629.js"><link rel="prefetch" href="/assets/js/4.102c42f8.js"><link rel="prefetch" href="/assets/js/5.64c0317a.js"><link rel="prefetch" href="/assets/js/6.f0ab4840.js"><link rel="prefetch" href="/assets/js/7.37b04fc2.js"><link rel="prefetch" href="/assets/js/8.02e51ca2.js"><link rel="prefetch" href="/assets/js/9.321af1f8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7f50033a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">王昊的个人博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/dev/" class="nav-link router-link-active">技术</a></div><div class="nav-item"><a href="/essay/" class="nav-link">随笔</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">资源</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Google
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="http://www.iconfont.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  阿里巴巴图标库
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://apizza.net/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Apizza
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.codewars.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Codewars
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://leetcode-cn.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  LeetCode
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="http://www.ruanyifeng.com/home.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  阮一峰
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhangxinxu.com/wordpress/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  张鑫旭
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  廖雪峰
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/dev/" class="nav-link router-link-active">技术</a></div><div class="nav-item"><a href="/essay/" class="nav-link">随笔</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">资源</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Google
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="http://www.iconfont.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  阿里巴巴图标库
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://apizza.net/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Apizza
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.codewars.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Codewars
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://leetcode-cn.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  LeetCode
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="http://www.ruanyifeng.com/home.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  阮一峰
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhangxinxu.com/wordpress/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  张鑫旭
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  廖雪峰
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/dev/小程序开发填坑总结.html" class="sidebar-link">小程序开发填坑总结</a></li><li><a href="/dev/公众号h5自定义分享.html" class="sidebar-link">公众号h5自定义分享</a></li><li><a href="/dev/小程序使用async和await.html" class="sidebar-link">在小程序中使用async/await</a></li><li><a href="/dev/chrome插件开发.html" class="sidebar-link">chrome插件开发</a></li><li><a href="/dev/rollup使用.html" class="sidebar-link">rollup使用教程</a></li><li><a href="/dev/jsPdf生成pdf.html" class="sidebar-link">jspdf生成Pdf文档</a></li><li><a href="/dev/vue的provide和inject方法.html" class="active sidebar-link">vue的provide和inject方法</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/dev/vue的provide和inject方法.html#原理" class="sidebar-link">原理</a></li><li class="sidebar-sub-header"><a href="/dev/vue的provide和inject方法.html#代码实现" class="sidebar-link">代码实现</a></li></ul></li><li><a href="/dev/vue刷新页面.html" class="sidebar-link">vue刷新页面</a></li><li><a href="/dev/vue-cli项目的环境编译.html" class="sidebar-link">vue-cli项目的环境编译</a></li><li><a href="/dev/nvm版本管理.html" class="sidebar-link">nvm版本管理</a></li><li><a href="/dev/npm源管理.html" class="sidebar-link">npm源管理</a></li><li><a href="/dev/外卖小程序首页商品列表和购物车的优化.html" class="sidebar-link">外卖小程序首页商品列表和购物车的优化</a></li><li><a href="/dev/svg的响应式.html" class="sidebar-link">svg的响应式</a></li><li><a href="/dev/python生成pdf报告.html" class="sidebar-link">python生成pdf报告</a></li></ul> </div> <div class="page"> <div class="content"><h1 id="vue的provide和inject方法"><a href="#vue的provide和inject方法" class="header-anchor">#</a> vue的provide和inject方法</h1> <p>在是用element-ui时遇到一个问题，在fixed定位的菜单上，el-select弹窗看不到，发现也是fixed定位，层级较低。并且el-select的option可以自定义，但是select的内容不支持自定义。于是考虑自己实现一个select组件。
+实际遇到一个问题，就是想要向el-option那样通过slot的方式传入select的选项，以便于自定义样式。但是el-option的数量不固定，el-select怎么拿到el-option中的选项。查看el-select代码，发现主要是用到了<a href="https://cn.vuejs.org/v2/api/#provide-inject" target="_blank" rel="noopener noreferrer">provide和inject<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p> <h2 id="原理"><a href="#原理" class="header-anchor">#</a> 原理</h2> <p>在el-select中，添加provicde配置：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  <span class="token function">provide</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token string">'select'</span><span class="token operator">:</span> <span class="token keyword">this</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在el-option中，配置inject将provide注入，即可通过this.select拿到select组件对象：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  inject<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'select'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>感觉有点像react的context，配置之后，后代都可以拿到，但是context是单向获取内容，而provide传递的对象显然可以直接操作。<br>
+这样，就可以在el-option的created阶段，向el-select的data中注入配置。从而可以在select中读取选项。同样的，在el-option的事件也可以直接调用el-select的事件。<br>
+另外，在el-option的beforeDestroy阶段，从el-select的选项列表中删除了这个选项，应该是用于动态选项的情况。<br>
+还有一个问题，就是当点击页面其他区域的时候，select应该是关闭下拉选项的，但是在select组件上直接添加onblur事件无效，查了一下，给div元素绑定一个tabIndex属性，再focus一下，就可以blur了。</p> <h2 id="代码实现"><a href="#代码实现" class="header-anchor">#</a> 代码实现</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;my-select&quot;</span> @blur<span class="token operator">=</span><span class="token string">&quot;onBlur&quot;</span> tabIndex<span class="token operator">=</span><span class="token string">&quot;1&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;selected option&quot;</span> @click<span class="token operator">=</span><span class="token string">&quot;handleToggleSelect&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>slot name<span class="token operator">=</span><span class="token string">&quot;select&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>my<span class="token operator">-</span>option <span class="token operator">:</span>label<span class="token operator">=</span><span class="token string">&quot;label&quot;</span> <span class="token operator">:</span>value<span class="token operator">=</span><span class="token string">&quot;value&quot;</span> <span class="token operator">:</span>placeholder<span class="token operator">=</span><span class="token string">&quot;placeholder&quot;</span> type<span class="token operator">=</span><span class="token string">&quot;selected&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>my<span class="token operator">-</span>option<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>slot<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>i
+        <span class="token operator">:</span><span class="token keyword">class</span><span class="token operator">=</span>&quot;<span class="token punctuation">[</span>
+          <span class="token string">'el-icon-arrow-down'</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            open<span class="token operator">:</span> isOptionsShow
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>&quot;
+      <span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>i<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;options&quot;</span> v<span class="token operator">-</span>show<span class="token operator">=</span><span class="token string">&quot;isOptionsShow&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>slot<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>slot<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token keyword">import</span> MyOption <span class="token keyword">from</span> <span class="token string">'./MyOption'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">'my-select'</span><span class="token punctuation">,</span>
+  props<span class="token operator">:</span> <span class="token punctuation">{</span>
+    value<span class="token operator">:</span> <span class="token punctuation">{</span>
+      required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    placeholder<span class="token operator">:</span> String<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      isOptionsShow<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      options<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  computed<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">label</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> item<span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token operator">?.</span>label<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">provide</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token string">'select'</span><span class="token operator">:</span> <span class="token keyword">this</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">created</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">handleToggleSelect</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>isOptionsShow <span class="token operator">=</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>isOptionsShow<span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">onOptionSelect</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'change'</span><span class="token punctuation">,</span> val<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>isOptionsShow <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">onOptionDestroy</span> <span class="token punctuation">(</span><span class="token parameter">index</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">onBlur</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>isOptionsShow <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  components<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'my-option'</span><span class="token operator">:</span> MyOption<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>style lang<span class="token operator">=</span><span class="token string">&quot;scss&quot;</span> scoped<span class="token operator">&gt;</span>
+<span class="token punctuation">.</span>my<span class="token operator">-</span>select<span class="token punctuation">{</span>
+  position<span class="token operator">:</span> relative<span class="token punctuation">;</span>
+  <span class="token punctuation">.</span>selected <span class="token punctuation">{</span>
+    border<span class="token operator">:</span> <span class="token number">1</span>px solid #<span class="token number">761</span>eea<span class="token punctuation">;</span>
+    border<span class="token operator">-</span>radius<span class="token operator">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+    cursor<span class="token operator">:</span> pointer<span class="token punctuation">;</span>
+    color<span class="token operator">:</span> #ae76f8<span class="token punctuation">;</span>
+    position<span class="token operator">:</span> relative<span class="token punctuation">;</span>
+    i <span class="token punctuation">{</span>
+      position<span class="token operator">:</span> absolute<span class="token punctuation">;</span>
+      right<span class="token operator">:</span> <span class="token number">10</span>px<span class="token punctuation">;</span>
+      top<span class="token operator">:</span> <span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span>
+      font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">20</span>px<span class="token punctuation">;</span>
+      transform<span class="token operator">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">)</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span><span class="token punctuation">.</span>open <span class="token punctuation">{</span>
+        transform<span class="token operator">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">)</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">180</span>deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token punctuation">.</span>options <span class="token punctuation">{</span>
+    position<span class="token operator">:</span> absolute<span class="token punctuation">;</span>
+    left<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    top<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>
+    transform<span class="token operator">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span><span class="token number">20</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    border<span class="token operator">:</span> <span class="token number">1</span>px solid #<span class="token number">761</span>eea<span class="token punctuation">;</span>
+    border<span class="token operator">-</span>radius<span class="token operator">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+    background<span class="token operator">:</span> #<span class="token number">2</span>d2e43<span class="token punctuation">;</span>
+    z<span class="token operator">-</span>index<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">;</span>
+    cursor<span class="token operator">:</span> pointer<span class="token punctuation">;</span>
+    max<span class="token operator">-</span>height<span class="token operator">:</span> <span class="token number">300</span>px<span class="token punctuation">;</span>
+    overflow<span class="token operator">:</span> auto<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">&gt;</span>
+
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div <span class="token operator">:</span><span class="token keyword">class</span><span class="token operator">=</span>&quot;<span class="token punctuation">[</span><span class="token string">'my-option'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    placeholder<span class="token operator">:</span> type <span class="token operator">===</span> <span class="token string">'selected'</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>value<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token string">&quot; @click=&quot;</span>handleSelectOption&quot;<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>slot<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token punctuation">{</span>value <span class="token operator">?</span> label <span class="token operator">:</span> placeholder<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>slot<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">'my-option'</span><span class="token punctuation">,</span>
+  props<span class="token operator">:</span> <span class="token punctuation">{</span>
+    label<span class="token operator">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">,</span> Number<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    value<span class="token operator">:</span> <span class="token punctuation">{</span>
+      required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    placeholder<span class="token operator">:</span> <span class="token punctuation">{</span>
+      type<span class="token operator">:</span> String<span class="token punctuation">,</span>
+      <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">''</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    type<span class="token operator">:</span> <span class="token punctuation">{</span>
+      type<span class="token operator">:</span> String<span class="token punctuation">,</span>
+      <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  inject<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'select'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token function">created</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>type <span class="token operator">!==</span> <span class="token string">'selected'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>select<span class="token punctuation">.</span>options<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">beforeDestroy</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>type <span class="token operator">!==</span> <span class="token string">'selected'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>select<span class="token punctuation">.</span><span class="token function">onOptionDestroy</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>select<span class="token punctuation">.</span>options<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">handleSelectOption</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>type <span class="token operator">!==</span> <span class="token string">'selected'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// debugger;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>select<span class="token punctuation">.</span><span class="token function">onOptionSelect</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>style lang<span class="token operator">=</span><span class="token string">&quot;scss&quot;</span> scoped<span class="token operator">&gt;</span>
+<span class="token punctuation">.</span>my<span class="token operator">-</span>option <span class="token punctuation">{</span>
+  box<span class="token operator">-</span>sizing<span class="token operator">:</span> border<span class="token operator">-</span>box<span class="token punctuation">;</span>
+  width<span class="token operator">:</span> <span class="token number">210</span>px<span class="token punctuation">;</span>
+  font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">12</span>px<span class="token punctuation">;</span>
+  padding<span class="token operator">:</span> <span class="token number">5</span>px <span class="token number">20</span>px<span class="token punctuation">;</span>
+  min<span class="token operator">-</span>height<span class="token operator">:</span> <span class="token number">22</span>px<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span><span class="token operator">:</span>hover<span class="token punctuation">{</span>
+    color<span class="token operator">:</span> #ae76f8<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token operator">&amp;</span><span class="token punctuation">.</span>placeholder<span class="token punctuation">{</span>
+    color<span class="token operator">:</span> #<span class="token number">999</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">&gt;</span>
+
+</code></pre></div></div> <div class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">11/9/2019, 5:23:09 PM</span></div></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.df436686.js" defer></script><script src="/assets/js/16.25b6b60c.js" defer></script>
+  </body>
+</html>
